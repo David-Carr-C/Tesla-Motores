@@ -4,6 +4,12 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Main_menu {
+    private String name;
+    private Scanner scanner = new Scanner(System.in); //Me aconseja ponerle final porque este objeto nunca debera cambiar
+    private String password; //Me aconseja alojar la variable en la funcion que la ocupa, porque las demas funciones no la necesitan o no la llaman
+    private char select;
+    private String car; //Lo mismo que password
+
     public Main_menu() {
         welcomeAndScan();
     }
@@ -11,28 +17,28 @@ public class Main_menu {
     private void welcomeAndScan() {
         System.out.println("Welcome to Tesla Motores!");
         System.out.println("Who are you?");
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.nextLine();
+        //Scanner scanner = new Scanner(System.in); // Ya se declaro el objeto como una variable, funciona en cualquier sitio y no se tiene que volver a declarar
+        name = scanner.nextLine();
         if (Objects.equals(name, "uwu")) { //name=="uwu" NO SIRVE, it doesn't work
-            nameFound(name,scanner);
+            //scanner.close(); this close/destroy the Object scan in this Main_menu.java - Este comando destruye el objeto dentro de esta clase
+            nameFound();
         } else {
-            nameNotFound(scanner);
+            nameNotFound();
         }
     }
 
-    private void nameNotFound(Scanner scanner) {
+    private void nameNotFound() {
         System.out.println("No match");
         scanner.close();
     }
 
-    private void nameFound(String name, Scanner scanner) {
+    private void nameFound() {
         System.out.println("Welcome "+name+"!");
         System.out.println("Please put your password :)!");
         int limit = 0;
-        String password;
         do {
             if (limit == 5) {
-                nameNotFound(scanner);
+                nameNotFound();
                 System.exit(0);
             }
             if ((limit >= 1)) { //We can put  "&& (limit != 5)", but in order to do, this works
@@ -41,26 +47,27 @@ public class Main_menu {
             password = scanner.nextLine();
             limit++;
         } while (!Objects.equals(password, "123"));
-        accessGranted(scanner, name);
+        accessGranted();
     }
 
-    private void accessGranted(Scanner scanner, String name) {
+    private void accessGranted() {
         System.out.println("Access Granted!");
         System.out.print("Would you like to place an order?");
-        agree(scanner);
+        agree();
         System.out.println("There are 4 cars: \"Tesla Model S\", \"Tesla Model 3\", \"Tesla Model X\" and \"Tesla Model Y\"");
         scanner.nextLine();
-        selectACar(scanner,name);
+        selectACar();
     }
 
-    private void agree(Scanner scanner) {
+    private void agree() {
         System.out.println(" (S/n): ");
         boolean proceed = false;
         do {
             char agree = scanner.next().charAt(0);
             if (agree == 'n') {
-                hopeU(scanner);
-                System.exit(0);
+                hopeU();
+                System.exit(0); //O podemos simplemente redirigirlo a una funcion que termine los pasos de welcomeAndScan();
+                //o sea simplemente crear una funcion y ya, esta terminaria y el constructor tambien
             } else if (agree=='S') {
                 proceed = true;
             } else {
@@ -69,11 +76,10 @@ public class Main_menu {
         } while (!proceed);
     }
 
-    private void selectACar(Scanner scanner, String name) {
-        char select;
+    private void selectACar() {
         do {
             System.out.println("What car would you like to see?");
-            String car = scanner.nextLine();
+            car = scanner.nextLine();
             if (Objects.equals(car, "Tesla Model S")) {
                 Tesla_Model_S teslamods = new Tesla_Model_S();
                 teslamods.presentation();
@@ -91,7 +97,7 @@ public class Main_menu {
                 teslamody.presentation();
                 //Tesla_Model_Y.presentation();
             } else {
-                nameNotFound(scanner);
+                nameNotFound();
             }
             System.out.println("Do you want to buy the "+ car +"? (S/n): ");
             System.out.println("To exit press \"x\"");
@@ -101,11 +107,11 @@ public class Main_menu {
                 break;
             }
         } while (select!='S');
-        version(scanner,name,select);
+        version();
 
     }
 
-    private void version(Scanner scanner, String name, char select) {
+    private void version() {
         if (select=='S'){
             System.out.println("Which version do you want?, There are Long Range and Plaid");
             String version = scanner.nextLine();
@@ -117,11 +123,11 @@ public class Main_menu {
                 System.out.println("Something gone wrong!");
             }
         } else {
-            hopeU(scanner);
+            hopeU();
         }
     }
 
-    private void hopeU(Scanner scanner) {
+    private void hopeU() {
         System.out.println("I hope you will find something of interest next time!");
         scanner.close();
     }
