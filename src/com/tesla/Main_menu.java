@@ -81,23 +81,23 @@ public class Main_menu {
             System.out.println("What car would you like to see?");
             car = scanner.nextLine();
             if (Objects.equals(car, "Tesla Model S")) {
-                Tesla_Model_S teslamods = new Tesla_Model_S();
-                teslamods.presentation();
-                //Tesla_Model_S.presentation();
+                /*Tesla_Model_S teslamods = new Tesla_Model_S();
+                teslamods.presentation();*/
+                Tesla_Model_S.presentation();
             } else if (Objects.equals(car, "Tesla Model 3")) {
-                Tesla_Model_3 teslamod3 = new Tesla_Model_3();
-                teslamod3.presentation();
-                //Tesla_Model_3.presentation();
+                /*Tesla_Model_3 teslamod3 = new Tesla_Model_3();
+                teslamod3.presentation();*/
+                Tesla_Model_3.presentation();
             } else if (Objects.equals(car, "Tesla Model X")) {
-                Tesla_Model_X teslamodx = new Tesla_Model_X();
-                teslamodx.presentation();
-                //Tesla_Model_X.presentation();
+                /*Tesla_Model_X teslamodx = new Tesla_Model_X();
+                teslamodx.presentation();*/
+                Tesla_Model_X.presentation();
             } else if (Objects.equals(car, "Tesla Model Y")) {
-                Tesla_Model_Y teslamody = new Tesla_Model_Y();
-                teslamody.presentation();
-                //Tesla_Model_Y.presentation();
+                /*Tesla_Model_Y teslamody = new Tesla_Model_Y();
+                teslamody.presentation();*/
+                Tesla_Model_Y.presentation();
             } else {
-                nameNotFound();
+                System.out.println("No match");
             }
             System.out.println("Do you want to buy the "+ car +"? (S/n): ");
             System.out.println("To exit press \"x\"");
@@ -113,15 +113,17 @@ public class Main_menu {
 
     private void version() {
         if (select=='S'){
-            System.out.println("Which version do you want?, There are Long Range and Plaid");
-            String version = scanner.nextLine();
-            if (Objects.equals(version, "Long Range")) {
-
-            } else if (Objects.equals(version, "Plaid")) {
-
-            } else  {
-                System.out.println("Something gone wrong!");
-            }
+            do {
+                System.out.println("Which version do you want?, There are \"Long Range\" and \"Plaid\":");
+                String version = scanner.nextLine();
+                if (Objects.equals(version, "Long Range")) {
+                    funcLong();
+                } else if (Objects.equals(version, "Plaid")) {
+                    funcPlaid();
+                } else {
+                    System.out.println("Something gone wrong!");
+                }
+            } while (true);
         } else {
             hopeU();
         }
@@ -130,5 +132,44 @@ public class Main_menu {
     private void hopeU() {
         System.out.println("I hope you will find something of interest next time!");
         scanner.close();
+    }
+
+    private void funcLong() {
+        boolean self = false;
+        if (Objects.equals(car, "Tesla Model S")) {
+                Tesla_Model_S teslamods = new Tesla_Model_S();
+                self = teslamods.funcLong(scanner);
+
+        } else if (Objects.equals(car, "Tesla Model 3")) {
+                Tesla_Model_3 teslamod3 = new Tesla_Model_3();
+
+        } else if (Objects.equals(car, "Tesla Model X")) {
+                Tesla_Model_X teslamodx = new Tesla_Model_X();
+
+        } else if (Objects.equals(car, "Tesla Model Y")) {
+                Tesla_Model_Y teslamody = new Tesla_Model_Y();
+
+        } else {
+            System.out.println("ERROR 9999!");
+        }
+    }
+
+    private void funcPlaid() {
+        boolean self = false;
+        if (Objects.equals(car, "Tesla Model S")) {
+                Tesla_Model_S teslamods = new Tesla_Model_S();
+                self = teslamods.funcPlaid(scanner);
+        } else if (Objects.equals(car, "Tesla Model 3")) {
+                /*Tesla_Model_3 teslamod3 = new Tesla_Model_3();
+                teslamod3.presentation();*/
+        } else if (Objects.equals(car, "Tesla Model X")) {
+                /*Tesla_Model_X teslamodx = new Tesla_Model_X();
+                teslamodx.presentation();*/
+        } else if (Objects.equals(car, "Tesla Model Y")) {
+                /*Tesla_Model_Y teslamody = new Tesla_Model_Y();
+                teslamody.presentation();*/
+        } else {
+            System.out.println("ERROR 9999!");
+        }
     }
 }

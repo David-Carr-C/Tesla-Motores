@@ -2,7 +2,7 @@ package com.tesla;
 
 public interface TeslaMotors {
     String name = null;
-    int speed = 0;
+    int range = 0;
     int max = 0;
     float fromZeroTo60mph = 0.00F;
     /*All of this is going to be change if the user select "Long Range" or "Plaid"*/
