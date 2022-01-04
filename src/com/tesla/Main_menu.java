@@ -9,6 +9,7 @@ public class Main_menu {
     private String password; //Me aconseja alojar la variable en la funcion que la ocupa, porque las demas funciones no la necesitan o no la llaman
     private char select;
     private String car; //Lo mismo que password
+    private boolean exit = false; //no se como sacar del objeto cuando se llega a una cierta linea <- actualizacion: se iguala a null y se llama al gc
 
     public Main_menu() {
         welcomeAndScan();
@@ -123,7 +124,7 @@ public class Main_menu {
                 } else {
                     System.out.println("Something gone wrong!, remember It's \"Plaid\" without \"");
                 }
-            } while (true);
+            } while (!exit);
         } else {
             hopeU();
         }
@@ -144,14 +145,17 @@ public class Main_menu {
         } else if (Objects.equals(car, "Tesla Model 3")) {
             Tesla_Model_3 teslamod3 = new Tesla_Model_3();
             self = teslamod3.funcLong(scanner);
+            payIt(self,teslamod3);
 
         } else if (Objects.equals(car, "Tesla Model X")) {
             Tesla_Model_X teslamodx = new Tesla_Model_X();
             self = teslamodx.funcLong(scanner);
+            payIt(self,teslamodx);
 
         } else if (Objects.equals(car, "Tesla Model Y")) {
             Tesla_Model_Y teslamody = new Tesla_Model_Y();
             self = teslamody.funcLong(scanner);
+            payIt(self,teslamody);
 
         } else {
             System.out.println("ERROR 9999!");
@@ -161,20 +165,24 @@ public class Main_menu {
     private void funcPlaid() {
         boolean self = false;
         if (Objects.equals(car, "Tesla Model S")) {
-                Tesla_Model_S teslamods = new Tesla_Model_S();
-                self = teslamods.funcPlaid(scanner);
+            Tesla_Model_S teslamods = new Tesla_Model_S();
+            self = teslamods.funcPlaid(scanner);
+            payIt(self,teslamods);
 
         } else if (Objects.equals(car, "Tesla Model 3")) {
-                Tesla_Model_3 teslamod3 = new Tesla_Model_3();
-                self = teslamod3.funcPlaid(scanner);
+            Tesla_Model_3 teslamod3 = new Tesla_Model_3();
+            self = teslamod3.funcPlaid(scanner);
+            payIt(self,teslamod3);
 
         } else if (Objects.equals(car, "Tesla Model X")) {
-                Tesla_Model_X teslamodx = new Tesla_Model_X();
-                self = teslamodx.funcPlaid(scanner);
+            Tesla_Model_X teslamodx = new Tesla_Model_X();
+            self = teslamodx.funcPlaid(scanner);
+            payIt(self,teslamodx);
 
         } else if (Objects.equals(car, "Tesla Model Y")) {
-                Tesla_Model_Y teslamody = new Tesla_Model_Y();
-                self = teslamody.funcPlaid(scanner);
+            Tesla_Model_Y teslamody = new Tesla_Model_Y();
+            self = teslamody.funcPlaid(scanner);
+            payIt(self,teslamody);
 
         } else {
             System.out.println("ERROR 9999!");
@@ -183,6 +191,7 @@ public class Main_menu {
     }
 
     private void payIt(boolean selfdrive, TeslaMotors x) { //Que hueva escribir la misma funcion en cada objeto, usemos templates
-        x.purchase();
+        x.purchase(); //Podemos continuar con el codigo aqui...
+        exit = true;
     }
 }
